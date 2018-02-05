@@ -1,0 +1,278 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="main.css">
+
+    <style type="text/css">
+      input:invalid {
+        color: red;
+      }
+    </style>
+
+    <title>EthMatka</title>
+  </head>
+  <body>
+    <div class='container'>
+      <div class="header border-bottom clearfix pt-2 px-4">
+        <nav id="metamask-info" style="display: none;">
+          <div class="float-right" style="font-size:12px">
+              <div>
+                  Your wallet
+                  <strong id="metamask-account"></strong>
+              </div>
+              
+              <div>
+                Your balance <strong id="metamask-balance"></strong>
+              </div>  
+          </div>
+        </nav>
+
+        <h3>
+          <a href="#" title="EthMatka">
+            ΞTH<span class="orange">Matka</span>
+          </a>
+        </h3>
+      </div>
+
+      <div class="float-right my-2">
+        <iframe id='widget-ticker-preview' src='//www.coingecko.com/en/widget_component/ticker/ethereum/usd?id=ethereum' style='border:none; height:125px; width: 275px;' scrolling='no' frameborder='0' allowTransparency='true'></iframe>
+      </div>
+
+      <div class="clearfix"></div>
+
+      <div class="jumbotron py-4" style="display: none;" id="betting-area">
+
+        <ul class="nav nav-tabs">
+          <li class="nav-item">
+            <a class="nav-link active" id="available-bets-tab" data-toggle="tab" href="#available-bets" role="tab" aria-controls="available-bets" aria-selected="true">Available Bets</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" id="my-bets-tab" data-toggle="tab" href="#my-bets" role="tab" aria-controls="my-bets" aria-selected="false">My Bets</a>
+          </li>
+        </ul>
+        <div class="tab-content" id="myTabContent">
+          <div class="tab-pane fade show active" id="available-bets" role="tabpanel" aria-labelledby="available-bets-tab">
+        
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item box-shadow pt-4">
+                <div class="row">
+                  
+                  <div class="col-md-2 text-center border-right">
+                    <h6>Ether price</h6>
+                    <p>>= 1200 USDT</p>
+
+                  </div>
+
+                  <div class="col-md-2 text-center border-right">
+                    <h6>Settlement date</h6>
+                    <p>8pm GMT, 8th Feb</p>
+                  </div>
+
+                  <div class="col-md-2 text-center border-right">
+                    <h6>Win Odds</h6>
+                    <p>20%</p>
+                  </div>
+
+                  <div class="col-md-2 text-center border-right">
+                    <h6>Multiplier</h6>
+                    <p id='multiplierA' data-value='5.0'>x 5.0</p>
+                  </div>
+
+                  <div class="col-md-2 text-center border-right">
+                    <h6>Payout</h6>
+                    <p id="payoutA">-</p>
+                  </div>
+
+                  <div class="col-md-2 pl-4">
+                    <div class="row">
+                      <input type="text" pattern="([0-9]*[.])?[0-9]+" class="form-control form-control-md col-md-6 mx-2" placeholder="in eth" id="betA" />
+                      <button type="button" class="btn btn-primary btn-sm" id="placeBetA">Bet</button>
+                    </div>
+                    <div style="font-size: 10px" class="pt-2">
+                      <div>Min bet: <strong class="min-bet">0.01</strong>ETH</div> 
+                      <div>Max bet: <strong class="max-bet" id="limitA"></strong>ETH</div>
+                    </div>
+                  </div>
+
+                </div>
+
+              </li>
+
+              <li class="list-group-item box-shadow pt-4">
+                <div class="row">
+                  
+                  <div class="col-md-2 text-center border-right">
+                    <h6>Ether price</h6>
+                    <p>< 1200 USDT</p>
+
+                  </div>
+
+                  <div class="col-md-2 text-center border-right">
+                    <h6>Settlement date</h6>
+                    <p>8pm GMT, 8th Feb</p>
+                  </div>
+
+                  <div class="col-md-2 text-center border-right">
+                    <h6>Win Odds</h6>
+                    <p>80%</p>
+                  </div>
+
+                  <div class="col-md-2 text-center border-right">
+                    <h6>Multiplier</h6>
+                    <p id='multiplierB' data-value='1.25'>x 1.25</p>
+                  </div>
+
+                  <div class="col-md-2 text-center border-right">
+                    <h6>Payout</h6>
+                    <p id="payoutB">-</p>
+                  </div>
+
+                  <div class="col-md-2 pl-4">
+                    <div class="row">
+                      <input type="text" pattern="([0-9]*[.])?[0-9]+" class="form-control form-control-md col-md-6 mx-2" placeholder="in eth" id="betB" />
+                      <button type="button" class="btn btn-primary btn-sm" id="placeBetB">Bet</button>
+                    </div>
+                    <div style="font-size: 10px" class="pt-2">
+                      <div>Min bet: <strong class="min-bet">0.01</strong>ETH</div> 
+                      <div>Max bet: <strong class="max-bet" id="limitB"></strong>ETH</div>
+                    </div>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div class="tab-pane fade" id="my-bets" role="tabpanel" aria-labelledby="my-bets-tab">
+            <div class="m-4">
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item box-shadow pt-4">
+                  <div class="row">
+                    
+                    <div class="col-md-2 text-center border-right">
+                      <h6>Ether price</h6>
+                      <p>>= 1200 USDT</p>
+                    </div>
+
+                    <div class="col-md-2 text-center border-right">
+                      <h6>Settlement date</h6>
+                      <p>8pm GMT, 8th Feb</p>
+                    </div>
+
+                    <div class="col-md-2 text-center border-right">
+                      <h6>Win Odds</h6>
+                      <p>20%</p>
+                    </div>
+
+                    <div class="col-md-2 text-center border-right">
+                      <h6>Multiplier</h6>
+                      <p>x 5.0</p>
+                    </div>
+
+                    <div class="col-md-2 text-center">
+                      <h6>Bet</h6>
+                      <p><strong id='my-betA'></strong> ETH</p>
+                    </div>
+                  </div>
+                </li>
+
+                <li class="list-group-item box-shadow pt-4">
+                  <div class="row">
+                    
+                    <div class="col-md-2 text-center border-right">
+                      <h6>Ether price</h6>
+                      <p>< 1200 USDT</p>
+
+                    </div>
+
+                    <div class="col-md-2 text-center border-right">
+                      <h6>Settlement date</h6>
+                      <p>8pm GMT, 8th Feb</p>
+                    </div>
+
+                    <div class="col-md-2 text-center border-right">
+                      <h6>Win Odds</h6>
+                      <p>80%</p>
+                    </div>
+
+                    <div class="col-md-2 text-center border-right">
+                      <h6>Multiplier</h6>
+                      <p>x 1.25</p>
+                    </div>
+
+                    <div class="col-md-2 text-center">
+                      <h6>Bet</h6>
+                      <p><strong id='my-betB'></strong> ETH</p>
+                    </div>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="jumbotron">
+        <h3 class="text-center mb-5">
+        How to play
+        </h3>
+
+        <div class="card my-4">
+          <div class="card-body">
+            <h5 class="card-title">BETTING</h5>
+            <p class="card-text">You can bet on the contract by sending the ETH to the smart contract address. The maximum and minimum amount that a user can bet for is specified alongside the contract.</p>
+          </div>
+        </div>
+
+        <div class="card my-4">
+          <div class="card-body">
+            <h5 class="card-title">PAY-OFFs</h5>
+            <p class="card-text">Pay-offs are decided by the settlement price of Ethereum. On winning the bet, the better shall receive WEI ( 10-18 Ethereum), rounded to the nearest smallest integer, equalling contract multiplier times the amount that the better had bet for i.e. bet-size of the user.</p>
+          </div>
+        </div>
+
+        <div class="card my-4">
+          <div class="card-body">
+            <h5 class="card-title">SETTLEMENT PRICE</h5>
+            <p class="card-text">Settlement price shall be taken as the VWAP (volume weighted average price) of ETH/USDT, observed between Indian Standard Time 17:00 hrs and 19:00 hrs on February 9, 2018 on Poloniex Exchange. The following API shall be used for determining the settlement price of ETH/USDT: <a href="https://poloniex.com/public?command=returnChartData&currencyPair=USDT_ETH&start=1517390000&end=9999999999&period=7200" text="Poloniex">Poloniex Api</a></p>
+          </div>
+        </div>
+
+        <div class="card my-4">
+          <div class="card-body">
+            <h5 class="card-title">TRANSFER USING METAMASK</h5>
+            <p class="card-text">Clicking the ‘BET’ button shall invoke metamask, using which you can transfer ETHs to the smart contract. We do not store your private keys and this site does not relay your private key on the internet. Currently Metamask is the only way to bet on the above listed contracts. You can learn more about Metamask here: <a href="https://metamask.io/">Metamask</a></p>
+          </div>
+        </div>
+
+        <div class="card my-4">
+          <div class="card-body">
+            <h5 class="card-title">WHAT ARE ODDS</h5>
+            <p class="card-text">Odds, as defined here,  reflect the probability of an event. If you think that the event is more likely than the odds that are listed here, you can bet the contract. Should you be of the opinion that the odds are richer than they ought to be, you can bet on the inverse contact. Together both the events are exhaustive.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal fade" tabindex="-1" role="dialog" id="metamask-missing" aria-labelledby="metamask-missing" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <p style="padding: 40px;text-align: center">
+            You need to install metamask chrome plugin and login using your ether wallet to play.<br/><br/>Click <a href="https://metamask.io/">here</a> to install Metamask.
+          </p>
+        </div>
+      </div>
+    </div>
+      
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+    <script src="./dist/contract.js"></script>
+    <script src="./dist/main.js"></script>
+  </body>
+</html>
